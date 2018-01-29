@@ -1,0 +1,243 @@
+    1  wget -qO- https://get.docker.com/ | sh
+    2  clear
+    3  service docker status
+    4  clear
+    5  docker
+    6  clear
+    7  docker images
+    8  clear
+    9  docker pull centos:6
+   10  docker images
+   11  clear
+   12  docker history centos:6
+   13  clear
+   14  ls
+   15  clear
+   16  docker images
+   17  docker run -it --name cent-1 centos:6
+   18  docker ps
+   19  clear
+   20  docker ps
+   21  docker ps -a
+   22  clear
+   23  docker run -it --name centy centos:6
+   24  docker exec -it centy /bin/bash
+   25  clear
+   26  docker 
+   27  clear
+   28  docker ps -a
+   29  docker attach centy
+   30  clear
+   31  docker
+   32  clear
+   33  docker attach cent-1
+   34  docker attach centy
+   35  docker commit cent-1 centos-withvim
+   36  docker images
+   37  docker run -it --name cent-2 centos-withvim
+   38  docker
+   39  clear
+   40  docker diff cent-2
+   41  docker diff centos-withvim
+   42  docker diff --help
+   43  docker
+   44  clear
+   45  docker stats centy
+   46  docker events centy
+   47  docker events
+   48  clear
+   49  docker
+   50  docker info
+   51  clear
+   52  docker
+   53  clear
+   54  docker export --help
+   55  docker export centy
+   56  docker export mycontainer.tar centy
+   57  docker export -o mycontainer.tar centy
+   58  ls
+   59  clear
+   60  docker
+   61  clear
+   62  docker inspect centy
+   63  docker inspect cent-1 | grep IP
+   64  docker inspect cent-2 | grep IP
+   65  clear
+   66  docker 
+   67  clear
+   68  docker attach cent-2
+   69  docker commit cent-2 centoswithvim
+   70  docker tag --help
+   71  docker tag centoswithvim rathihimanshu/centoswithvim:v1
+   72  clear
+   73  docker images
+   74  docker login
+   75  docker push rathihimanshu/centoswithvim:v1
+   76  clear
+   77  docker images
+   78  clear
+   79  cd /var/lib/docker/
+   80  ls
+   81  docker images
+   82  cd image/
+   83  ls
+   84  cd overlay2/
+   85  ls
+   86  clear
+   87  ls
+   88  cd layerdb/
+   89  ls
+   90  cd sha256/
+   91  ls
+   92  cd ..
+   93  ls
+   94  cd imagedb/
+   95  ls
+   96  cd content/
+   97  ls
+   98  clear
+   99  cd sha256/
+  100  ls
+  101  docker images
+  102  docker history centos:6
+  103  ls
+  104  docker history centos-withvim
+  105  clear
+  106  pwd
+  107  claer
+  108  clear
+  109  ls
+  110  docker run -it --name cent-4 centos:6
+  111  docker commit cent-4 myimage-1
+  112  ls
+  113  clear
+  114  pwd
+  115  ls -la
+  116  clear
+  117  cd ..
+  118  ls
+  119  cd layerdb/
+  120  ls
+  121  cd sha256/
+  122  ls
+  123  docker ps
+  124  cd ..
+  125  ls
+  126  clear
+  127  ls
+  128  cd ..
+  129  ls
+  130  cd container
+  131  ls
+  132  cd containers/
+  133  ls
+  134  docker ps
+  135  clear
+  136  ls
+  137  docker rm -f centy
+  138  ls
+  139  cd
+  140  clear
+  141  docker run --help
+  142  clear
+  143  docker run -d --name m1 -m 100m centos:6
+  144  docker ps
+  145  docker run -itd --name m11 -m 100m centos:6
+  146  docker ps
+  147  clear
+  148  cd /sys/fs/
+  149  ls
+  150  cd cgroup/
+  151  ls
+  152  cd memory/
+  153  ls
+  154  clear
+  155  cd docker/
+  156  ls
+  157  clear
+  158  docker ps
+  159  ls
+  160  clear
+  161  cd 096996d47f5d212cd3cc975cd3159cbe4d70dc25da6aa1a5d3c15dabd2ab6637/
+  162  ;s
+  163  ls
+  164  cat memory.limit_in_bytes 
+  165  cd
+  166  clear
+  167  cd /etc/docker/
+  168  ls
+  169  nano daemon.json
+  170  service docker restart
+  171  service docker status
+  172  clear
+  173  service docker start
+  174  rm daemon.json 
+  175  service docker start
+  176  service docker status
+  177  clear
+  178  docker ps
+  179  docker ps -a
+  180  clear
+  181  docker run -it --name d1 centos:6 /bin/bash -c 'for i in {1..10};do echo $i;sleep 1;done'
+  182  docker ps
+  183  clear
+  184  docker run -it --name d1 centos:6 /bin/bash -c 'while true;do X=$[$X+1];echo $X;sleep 1;done'
+  185  docker run -d --name d2 centos:6 /bin/bash -c 'while true;do X=$[$X+1];echo $X;sleep 1;done'
+  186  docker ps
+  187  clear
+  188  docker logs d2
+  189  clera
+  190  clear
+  191  docker logs d2
+  192  clear
+  193  docker stop d2
+  194  docker start d2
+  195  docker logs d2
+  196  clear
+  197  cd
+  198  clear
+  199  ifconfig
+  200  clear
+  201  docker run -d --name n1 --net host nginx
+  202  docker history nginx
+  203  clear
+  204  docker ps
+  205  curl locahost
+  206  curl localhost
+  207  clear
+  208  service nginx status
+  209  docker exec -it n1 /bin/bash
+  210  docker ps
+  211  docker exec -it n1 /bin/bash
+  212  docker ps
+  213  clear
+  214  docker run -d --name n2 --net host nginx
+  215  docker ps
+  216  clear
+  217  docker ps
+  218  docker rm -f n1
+  219  clear
+  220  ls
+  221  mkdir vol
+  222  ls
+  223  cd vol/
+  224  ls
+  225  clear
+  226  echo volumemounts > index.html
+  227  cd 
+  228  clear
+  229  docker run -d --name v1 -v /root/vol/:/usr/share/nginx/html -p 1000:80 nginx
+  230  docker run -d --name v2 -p 1010:80 nginx
+  231* 
+  232  cd vol/
+  233  ls
+  234  echo changedcontent >> index.html 
+  235  clear
+  236  cd 
+  237  clear
+  238  pwd
+  239  docker run -d --name v3 -P 80 nginx
+  240  docker run -d --name v3 -P nginx
+  241  docker ps
+  242  clear
+  243  history > dockercommands.txt
