@@ -207,37 +207,274 @@
   207  clear
   208  service nginx status
   209  docker exec -it n1 /bin/bash
-  210  docker ps
-  211  docker exec -it n1 /bin/bash
-  212  docker ps
+  210  clear
+  211  docker ps
+  212  docker ps -a
   213  clear
-  214  docker run -d --name n2 --net host nginx
+  214  docker run -d --name ng1 nginx
   215  docker ps
-  216  clear
-  217  docker ps
-  218  docker rm -f n1
+  216  docker inspect ng1 
+  217  clear
+  218  ifconfig
   219  clear
-  220  ls
-  221  mkdir vol
-  222  ls
-  223  cd vol/
-  224  ls
-  225  clear
-  226  echo volumemounts > index.html
-  227  cd 
-  228  clear
-  229  docker run -d --name v1 -v /root/vol/:/usr/share/nginx/html -p 1000:80 nginx
-  230  docker run -d --name v2 -p 1010:80 nginx
-  231* 
-  232  cd vol/
-  233  ls
-  234  echo changedcontent >> index.html 
-  235  clear
-  236  cd 
-  237  clear
-  238  pwd
-  239  docker run -d --name v3 -P 80 nginx
-  240  docker run -d --name v3 -P nginx
-  241  docker ps
-  242  clear
-  243  history > dockercommands.txt
+  220  docker network ls
+  221  docker network inspect df11
+  222  clear
+  223  docker network
+  224  clear
+  225  docker network ls
+  226  docker network create --help
+  227  docker network create --subnet 10.0.1.0/16 --gateway 10.0.1.1 --attachable --driver bridge net-one
+  228  docker network ls
+  229  clear
+  230  docker network create --subnet 10.0.2.0/16 --gateway 10.0.2.1 --attachable --driver bridge net-two
+  231  docker network rm net-one
+  232  docker network create --subnet 10.0.1.0/24 --gateway 10.0.1.1 --attachable --driver bridge net-one
+  233  docker network create --subnet 10.0.2.0/24 --gateway 10.0.2.1 --attachable --driver bridge net-two
+  234  clear
+  235  docker run --help
+  236  clear
+  237  docker run -it --name con-one --hostname con-one --net net-one --ip 10.0.1.11 centos:6  
+  238  docker run -it --name con-three --hostname con-three --net net-two --ip 10.0.2.11 centos:6  
+  239  ifconfig
+  240  clear
+  241  docker attach con-three
+  242  docker commit con-three centoswithping
+  243  docker run -it --name con-two --hostname con-two --net net-two --ip 10.0.2.12 centoswithping  
+  244  clear
+  245  history
+  246  clear
+  247  ls
+  248  mkdir demo-dockerfile
+  249  cd demo-dockerfile/
+  250  clear
+  251  ls
+  252  nano Dockerfile
+  253  echo hello > demo.txt
+  254  ls
+  255  cat Dockerfile 
+  256  docker build --help
+  257  clear
+  258  docker build -t df1 .
+  259  docker history df1
+  260  clear
+  261  docker run -it df1
+  262  clear
+  263  nano Dockerfile 
+  264  docker build -t df1 .
+  265  clear
+  266  docker run -it df1
+  267  clear
+  268  ls
+  269  cat Dockerfile 
+  270  history
+  271  clear
+  272  nano Dockerfile 
+  273  ls
+  274  echo helloall > index.html
+  275  ls
+  276  docker build -t my1 .
+  277  docker run -d my1
+  278  docker inspect 0d15 | grep IP
+  279  clear
+  280  nano Dockerfile 
+  281  docker build -t my1 .
+  282  docker run -d my1
+  283  docker inspect 5560
+  284  nano Dockerfile 
+  285  docker exec -it 5560 /bin/bash
+  286  clear
+  287  ls
+  288  nano Dockerfile 
+  289  docker build -t my1 .
+  290  docker run -it my1
+  291  clear
+  292  cat Dockerfile 
+  293  clear
+  294  ls
+  295  nano Dockerfile 
+  296  ls
+  297  cat index.html 
+  298  docker build -t ap1 .
+  299  docker run -it ap1
+  300  docker inspect b0f3
+  301  clear
+  302  nano Dockerfile 
+  303  docker build -t ap1 .
+  304  docker run -it ap1
+  305  docker inspect 8b05
+  306  clear
+  307  docker ps | grep 8b
+  308  nano Dockerfile 
+  309  docker build -t ap1 .
+  310  docker run -it ap1
+  311  docker ps | grep 1cfb
+  312  clear
+  313  docker run -it --name c1 centos:6 /bin/echo "hello all"
+  314  nano Dockerfile 
+  315  docker build -t ap1 .
+  316  docker run -it ap1
+  317  docker run -it ap1 /bin/echo "hello"
+  318  nano Dockerfile 
+  319  clear
+  320  docker build -t ap1 .
+  321  clear
+  322  docker run -it ap1
+  323  docker run -it ap1 /bin/echo "hi"
+  324  cat Dockerfile 
+  325  clear
+  326  docker run -it nginx /bin/bash
+  327  clear
+  328  docker-compose
+  329  clear
+  330  which pip
+  331  apt-get install python-pip
+  332  clear
+  333  clear
+  334  docker-compose
+  335  clear
+  336  ls
+  337  cat Dockerfile 
+  338  nano Dockerfile 
+  339  nano docker-compose.yaml
+  340  docker-compose up 
+  341  docker-compose ps
+  342  docker-compose up -d
+  343  docker-compose ps
+  344  clear
+  345  nano docker-compose.yaml 
+  346  docker-compose up -d
+  347  clear
+  348  docker-compose ps
+  349  docker inspect demodockerfile_wordpress_1 | grep IP
+  350  clear
+  351  cat docker-compose.yaml 
+  352  clear
+  353  history
+  354  clear
+  355  docker-compose ps
+  356  cler
+  357  cat docker-compose.yaml 
+  358  clear
+  359  hostname docker2
+  360  hostname docker1
+  361  echo docker1 > /etc/hostname
+  362  exec bash
+  363  cd
+  364  clear
+  365  docker swarm
+  366  clear
+  367  docker swarm init --help
+  368  ifconfig
+  369  clear
+  370  docker rm -f `docker ps -a -q`
+  371  docker ps
+  372  clear
+  373  docker swarm init --help
+  374  ifconfig
+  375  clear
+  376  docker swarm init --advertise-addr 192.168.56.101
+  377  docker swarm ls
+  378  clear
+  379  docker node ls
+  380  history
+  381  clear
+  382  docker service ls
+  383  ls
+  384  cd mkdir swarm
+  385  mkdir swarm
+  386  cd swarm/
+  387  clear
+  388  ls
+  389  nano index.html
+  390  clear
+  391  cat index.html 
+  392  nano Dockerfile
+  393  clear
+  394  docker build -t nginx:yellow .
+  395  clear
+  396  docker service 
+  397  clear
+  398  docker service create --help
+  399  clear
+  400  docker service create --help
+  401  clear
+  402  docker service create --replicas 10 nginx:yellow -p 800:80
+  403  clear
+  404  ls
+  405  cat index.html 
+  406  cat Dockerfile 
+  407  clear
+  408  docker service ls
+  409  docker service rm tender_hermann
+  410  clear
+  411  docker service create --replicas 10 --name swarmservice nginx:yellow -p 800:80
+  412  clear
+  413  docker service ls
+  414  docker service rm swarmservice
+  415  clear
+  416  docker service create --replicas 10 --name swarmservice -p 800:80 nginx:yellow
+  417  docker ps
+  418  clear
+  419  docker node ls
+  420  docker node inspect docker3 
+  421  clear
+  422  docker node inspect docker3 | availability
+  423  docker node inspect docker3 | grep availability
+  424  docker node inspect docker3 | grep a*
+  425  clear
+  426  docker node inspect docker3 | grep av*
+  427  clear
+  428  docker node inspect docker3
+  429  clear
+  430  docker node update
+  431  docker node update --help
+  432  docker node update --availability "drain" docker2
+  433  docker node ls
+  434  clear
+  435  docker service ps swarmservice
+  436  clear
+  437  docker service ps swarmservice
+  438  docker ps
+  439  clear
+  440  docker node ls
+  441  docker service ps swarmservice
+  442  clear
+  443  docker ps
+  444  docker node update --availability "active" docker2
+  445  clear
+  446  docker node ls
+  447  docker ps
+  448  clear
+  449  docker service 
+  450  docker service scale --help
+  451  docker service scale swarmservice=50
+  452  clear
+  453  docker ps
+  454  clear
+  455  ls
+  456  nano Dockerfile 
+  457  nano index.html 
+  458  docker build -t nginx:green .
+  459  clear
+  460  docker service 
+  461  clear
+  462  docker service update --help
+  463  clear
+  464  docker service update --image nginx:green swarmservice
+  465* docker service update --hel
+  466  docker service update --rollback swarmservice
+  467  clear
+  468  cd
+  469  ls
+  470  cd demo-dockerfile/
+  471  ls -la
+  472  cd
+  473  ls
+  474  clear
+  475  ls
+  476  cd swarm/
+  477  ls
+  478  cd
+  479  clear
+  480  history > dockercommands.txt
